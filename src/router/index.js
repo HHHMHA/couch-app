@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import coachRoutes from './coach-routes'
+import NotFound from '@/pages/NotFound';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,7 +12,7 @@ const router = createRouter({
     ...coachRoutes,
     {
       path: '/:notFound(.*)',
-      component: null,
+      component: NotFound,
     },
   ]
 });
