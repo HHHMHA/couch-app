@@ -1,5 +1,6 @@
 <template>
-
+  COUCH DETAILS
+  <router-view></router-view>
 </template>
 
 <script>

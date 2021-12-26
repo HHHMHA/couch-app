@@ -1,5 +1,5 @@
 <template>
-
+  REQUESTS
 </template>
 
 <script>

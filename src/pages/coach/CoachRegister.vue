@@ -1,5 +1,5 @@
 <template>
-
+  REGISTER
 </template>
 
 <script>
