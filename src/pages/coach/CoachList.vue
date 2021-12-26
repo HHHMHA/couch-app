@@ -18,15 +18,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { getCoaches, hasCoaches } from '@/store/modules/coaches/constants'
 
 export default {
   name: 'CoachList',
   computed: {
     ...mapGetters({
-      hasCoaches: 'coaches/hasCoaches',
+      hasCoaches: hasCoaches,
     }),
     filteredCoaches() {
-      return this.$store.getters['coaches/coaches'];
+      return this.$store.getters[getCoaches];
     },
   },
 };
