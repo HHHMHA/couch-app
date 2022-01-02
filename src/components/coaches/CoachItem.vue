@@ -3,11 +3,11 @@
     <h3>{{ fullName }}</h3>
     <h4>${{ rate }}/hour</h4>
     <div>
-      <span v-for='area in areas' :key='area'>{{ area }}</span>
+      <base-badge v-for='area in areas' :key='area' :type='area' :text='area'></base-badge>
     </div>
     <div class='actions'>
-      <router-link :to='contactLink'>Contact</router-link>
-      <router-link :to='detailsLink'>View Details</router-link>
+      <base-button :to='contactLink' link mode='outline'>Contact</base-button>
+      <base-button :to='detailsLink' link>View Details</base-button>
     </div>
   </li>
 </template>
@@ -20,7 +20,7 @@ export default {
     'firstName',
     'lastName',
     'rate',
-    'areas',
+    'areas'
   ],
   computed: {
     fullName() {
@@ -32,8 +32,8 @@ export default {
     },
     detailsLink() {
       return `/coaches/${this.id}`;
-    },
-  },
+    }
+  }
 };
 </script>
 
