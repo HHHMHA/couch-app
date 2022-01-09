@@ -13,6 +13,7 @@ export default [
   {
     name: 'coach-detail',
     path: '/coaches/:id',
+    props: true,
     component: CoachDetail,
     children: [
       {
