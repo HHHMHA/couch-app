@@ -6,7 +6,7 @@
     <base-card>
       <div class='controls'>
         <base-button mode='outline'>Refresh</base-button>
-        <base-button to='/register' link></base-button>
+        <base-button to='/register' link v-if='!isCoach'></base-button>
       </div>
 
       <ul v-if='hasCoaches'>
@@ -26,7 +26,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { getCoaches, hasCoaches } from '@/store/modules/coaches/constants';
+import { getCoaches, hasCoaches, isCoach } from '@/store/modules/coaches/constants';
 import CoachItem from '@/components/coaches/CoachItem';
 import CoachFilter from '@/components/coaches/CoachFilter';
 
@@ -47,7 +47,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hasCoaches: hasCoaches
+      hasCoaches: hasCoaches,
+      isCoach: isCoach,
     }),
     filteredCoaches() {
       const coaches = this.$store.getters[getCoaches];

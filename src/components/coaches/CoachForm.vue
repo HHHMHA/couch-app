@@ -44,6 +44,9 @@
 <script>
 export default {
   name: 'CoachForm',
+  emits: [
+    'save-data',
+  ],
   date() {
     return {
       form: {
@@ -57,7 +60,7 @@ export default {
   },
   methods: {
     submit() {
-
+      this.$emit('save-data', this.form);
     }
   }
 };

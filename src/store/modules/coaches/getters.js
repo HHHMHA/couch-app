@@ -8,4 +8,9 @@ export default {
   getCoach(state, getters) {
     return (id) => getters.coaches.find(item => item.id === id);
   },
+  isCoach(state, getters, rootState, rootGetters) {
+    const coaches = getters.coaches;
+    const userId = rootGetters.userId;
+    return coaches.some(coach => coach.id === userId);
+  }
 }
