@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { contactCoach } from '@/store/modules/requests/constants';
+
 export default {
   name: 'CoachContact',
   data() {
@@ -24,6 +26,7 @@ export default {
       form: {
         email: '',
         message: '',
+        coachId: this.$route.params.id,
       },
       valid: {
         email: true,
@@ -53,6 +56,9 @@ export default {
 
       if (!this.isValid)
         return;
+
+      this.$store.dispatch(contactCoach, this.form);
+      this.$router.replace("/coaches");
     },
   },
 };
