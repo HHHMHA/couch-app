@@ -1,26 +1,30 @@
 <template>
   <form @submit.prevent='submit'>
-    <div class='form-control'>
+    <div class='form-control' :class='{invalid: !valid.firstName}'>
       <label for='firstname'>Firstname</label>
       <input type='text' id='firstname' v-model='form.firstName'>
+      <p v-if='!valid.firstName'>First name must not be empty</p>
     </div>
 
-    <div class='form-control'>
+    <div class='form-control' :class='{invalid: !valid.lastName}'>
       <label for='lastname'>Lastname</label>
       <input type='text' id='lastname' v-model='form.lastName'>
+      <p v-if='!valid.lastName'>Last name must not be empty</p>
     </div>
 
-    <div class='form-control'>
+    <div class='form-control' :class='{invalid: !valid.description}'>
       <label for='description'>Description</label>
       <textarea rows='5' id='description' v-model='form.description'></textarea>
+      <p v-if='!valid.description'>Description must not be empty</p>
     </div>
 
-    <div class='form-control'>
-      <label for='rate'>Horly Rate</label>
+    <div class='form-control' :class='{invalid: !valid.rate}'>
+      <label for='rate'>Hourly Rate</label>
       <input type='number' id='rate' v-model.number='form.rate'>
+      <p v-if='!valid.rate'>Rate must be at least 1</p>
     </div>
 
-    <div class='form-control'>
+    <div class='form-control' :class='{invalid: !valid.description}'>
       <h3>Areas of Expertise</h3>
       <div>
         <div>
@@ -36,7 +40,9 @@
           <label for='career'>Career</label>
         </div>
       </div>
+      <p v-if='!valid.areas'>Please select at least one expertise</p>
     </div>
+    <p v-if='isValid'>Please fix the above errors</p>
     <base-button>Register</base-button>
   </form>
 </template>
@@ -55,11 +61,54 @@ export default {
         description: '',
         rate: 0,
         areas: []
-      }
+      },
+      valid: {
+        firstName: true,
+        lastName: true,
+        description: true,
+        rate: true,
+        areas: true,
+      },
     };
   },
+  computed: {
+    isValid() {
+      return !Object.values(this.valid).includes(false);
+    },
+  },
   methods: {
+    validateForm() {
+      this.form.firstName = true;
+      if (this.form.firstName === '') {
+        this.valid.firstName = false;
+      }
+
+      this.form.lastName = true;
+      if (this.form.lastName === '') {
+        this.valid.lastName = false;
+      }
+
+      this.form.description = true;
+      if (this.form.description === '') {
+        this.valid.description = false;
+      }
+
+      this.form.rate = true;
+      if (!this.form.rate || this.form.rate < 0) {
+        this.valid.description = false;
+      }
+
+      this.form.areas = true;
+      if (this.form.areas.length === 0) {
+        this.valid.description = false;
+      }
+    },
     submit() {
+      this.validateForm();
+
+      if (!this.isValid)
+        return;
+
       this.$emit('save-data', this.form);
     }
   }
